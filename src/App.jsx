@@ -1,15 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const App = () => {
-  const handleLogin = () => {
-    // Redirect to Fyers authorization endpoint
-    window.location.href = `https://api-t1.fyers.in/api/v3/generate-authcode?client_id=710RYAUI5Z-100&redirect_uri=https://fyers-backend.onrender.com/&response_type=code&state=sample_state`;
+  const [accessToken, setAccessToken] = useState('');
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.get('/auth/callback', {
+        params: {
+          code: new URLSearchParams(window.location.search).get('code'),
+        },
+      });
+
+      setAccessToken(response.data.accessToken);
+    } catch (error) {
+      console.error('Error fetching access token:', error);
+    }
   };
 
   return (
     <div>
       <h1>Welcome to My App</h1>
-      <button onClick={handleLogin}>Login with Fyers</button>
+      {!accessToken ? (
+        <button onClick={handleLogin}>Login with Fyers</button>
+      ) : (
+        <div>
+          <p>Access Token: {accessToken}</p>
+          {/* Display additional data fetched with the access token */}
+        </div>
+      )}
     </div>
   );
 };
