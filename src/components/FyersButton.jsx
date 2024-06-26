@@ -15,9 +15,19 @@ const App = () => {
     }
   };
 
+  const handleaccessToken = async () => {
+    try {
+      const response = await api.get("/generateAccessToken");
+      console.log(response);
+    } catch (error) {
+      console.error("Failed to retrieve Fyers auth URL:", error);
+    }
+  };
+
   return (
     <div>
       <button onClick={handleFyersAuth}>Authenticate with Fyers</button>
+      <button onClick={handleaccessToken}>generate access token</button>
     </div>
   );
 };
