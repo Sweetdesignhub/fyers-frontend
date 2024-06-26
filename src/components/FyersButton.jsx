@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import api from "../config";
 
 const App = () => {
@@ -6,9 +7,9 @@ const App = () => {
 
   const handleFyersAuth = async () => {
     try {
-      const response = await api.get("/api/fyers");
+      const response = await api.get("/fyers");
       const { authCodeURL } = response.data;
-      window.location.href = authCodeURL; // Redirect user to Fyers authentication URL
+      window.location.href = authCodeURL;
     } catch (error) {
       console.error("Failed to retrieve Fyers auth URL:", error);
     }
