@@ -60,8 +60,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from "react-router-dom";
-import api from "../config";
-import Profile from "./Profile";
+import api from "./config";
 
 const App = () => {
   const [authCodeURL, setAuthCodeURL] = useState("");
