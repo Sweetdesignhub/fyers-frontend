@@ -6,6 +6,9 @@ const Profile = () => {
   const [holdings, setHoldings] = useState(null);
   const [orders, setOrders] = useState(null);
 
+  console.log(holdings);
+  console.log(orders);
+
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -36,6 +39,7 @@ const Profile = () => {
 
     fetchProfile();
     fetchHoldings();
+    fetchOrders();
   }, []);
 
   if (!profile) return <p>Loading profile & holdings...</p>;
@@ -48,7 +52,7 @@ const Profile = () => {
       <h1>Holdings</h1>
       <pre>{JSON.stringify(holdings, null, 2)}</pre>
 
-      <h1>orderss</h1>
+      <h1>Orders</h1>
       <pre>{JSON.stringify(orders, null, 2)}</pre>
     </div>
   );
