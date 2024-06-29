@@ -4,6 +4,7 @@ import api from "../config";
 const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [holdings, setHoldings] = useState(null);
+  const [orders, setOrders] = useState(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -24,6 +25,15 @@ const Profile = () => {
       }
     };
 
+    const fetchOrders = async () => {
+      try {
+        const response = await api.get("/getOrders");
+        setProfile(response.data);
+      } catch (error) {
+        console.error("Failed to fetch orders:", error);
+      }
+    };
+
     fetchProfile();
     fetchHoldings();
   }, []);
@@ -37,6 +47,9 @@ const Profile = () => {
 
       <h1>Holdings</h1>
       <pre>{JSON.stringify(holdings, null, 2)}</pre>
+
+      <h1>orderss</h1>
+      <pre>{JSON.stringify(orders, null, 2)}</pre>
     </div>
   );
 };
